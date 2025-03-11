@@ -1,8 +1,8 @@
+from time import sleep
 import requests
 import json
 import os
 import sys
-from time import sleep
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
@@ -19,6 +19,10 @@ def issue_exists(title):
 
         issues = response.json()
         for issue in issues:
+            print("---")
+            print("title", title)
+            print("issue", issue)
+            print("---")
             if issue["title"] == title:
                 return True
         return False
@@ -33,10 +37,10 @@ def create_github_issue(title, body):
             print(f"Issue '{title}' already exists. Skipping creation.")
             return
 
-        url = "https://api.github.com/repos/0xLucca/testing-docs/issues"
+        url = "https://api.github.com/repos/polkadot-developers/polkadot-docs/issues"
         headers = {
             "Authorization": f"token {GITHUB_TOKEN}",
-            "Accept": "application/vnd.github.raw+json",
+            "Accept": "application/vnd.github.v3+json",
         }
         data = {"title": title, "body": body}
         response = requests.post(url, headers=headers, json=data)
