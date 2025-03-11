@@ -2,6 +2,7 @@ import requests
 import json
 import os
 import sys
+from time import sleep
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
@@ -39,7 +40,6 @@ def create_github_issue(title, body):
         }
         data = {"title": title, "body": body}
         response = requests.post(url, headers=headers, json=data)
-        print("Response:", response.json())
 
         if response.status_code == 201:
             print(f"Successfully created issue '{title}'")
@@ -75,7 +75,7 @@ Latest version: {dep['latest_version']}
 Latest release: [View here]({dep['latest_release_url']})
 
 Please review the change log and update the documentation accordingly."""
-
+        sleep(1)
         create_github_issue(title, body)
 
 if __name__ == "__main__":
