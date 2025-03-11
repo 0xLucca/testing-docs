@@ -9,7 +9,7 @@ GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 def issue_exists(title):
     """Check if an issue with the same title already exists."""
     try:
-        url = "https://api.github.com/repos/polkadot-developers/polkadot-docs/issues"
+        url = "https://api.github.com/repos/0xLucca/testing-docs/issues"
         headers = {
             "Authorization": f"token {GITHUB_TOKEN}",
             "Accept": "application/vnd.github.v3+json",
@@ -37,7 +37,7 @@ def create_github_issue(title, body):
             print(f"Issue '{title}' already exists. Skipping creation.")
             return
 
-        url = "https://api.github.com/repos/polkadot-developers/polkadot-docs/issues"
+        url = "https://api.github.com/repos/0xLucca/testing-docs/issues"
         headers = {
             "Authorization": f"token {GITHUB_TOKEN}",
             "Accept": "application/vnd.github.v3+json",
