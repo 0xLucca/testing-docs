@@ -35,7 +35,7 @@ def create_github_issue(title, body):
         url = "https://api.github.com/repos/polkadot-developers/polkadot-docs/issues"
         headers = {
             "Authorization": f"token {GITHUB_TOKEN}",
-            "Accept": "application/vnd.github.v3+json",
+            "Accept": "application/vnd.github.raw+json",
         }
         data = {"title": title, "body": body}
         response = requests.post(url, headers=headers, json=data)
