@@ -19,10 +19,6 @@ def issue_exists(title):
 
         issues = response.json()
         for issue in issues:
-            print("---")
-            print("title", title)
-            print("issue", issue)
-            print("---")
             if issue["title"] == title:
                 return True
         return False
