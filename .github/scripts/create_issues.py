@@ -4,6 +4,8 @@ import os
 import sys
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
+# REPO_API_URL = "https://api.github.com/repos/polkadot-developers/polkadot-docs/issues"
+REPO_API_URL = "https://api.github.com/repos/0xLucca/testing-docs/issues"
 
 def get_current_branch():
     """Get the current git branch from GitHub environment variables."""
@@ -24,12 +26,11 @@ def get_current_branch():
 def issue_exists(title):
     """Check if an issue with the same title already exists."""
     try:
-        url = "https://api.github.com/repos/polkadot-developers/polkadot-docs/issues"
         headers = {
             "Authorization": f"token {GITHUB_TOKEN}",
             "Accept": "application/vnd.github.v3+json",
         }
-        response = requests.get(url, headers=headers)
+        response = requests.get(REPO_API_URL, headers=headers)
         response.raise_for_status()
 
         issues = response.json()
@@ -48,13 +49,12 @@ def create_github_issue(title, body):
             print(f"Issue '{title}' already exists. Skipping creation.")
             return
 
-        url = "https://api.github.com/repos/polkadot-developers/polkadot-docs/issues"
         headers = {
             "Authorization": f"token {GITHUB_TOKEN}",
             "Accept": "application/vnd.github.v3+json",
         }
         data = {"title": title, "body": body}
-        response = requests.post(url, headers=headers, json=data)
+        response = requests.post(REPO_API_URL, headers=headers, json=data)
 
         if response.status_code == 201:
             print(f"Successfully created issue '{title}'")
