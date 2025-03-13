@@ -88,11 +88,11 @@ def main():
         
         body = f"""A new release has been detected for {dep['name']}.
 
-Category: {dep['category']}
-Current version: {dep['current_version']}
-Latest version: {dep['latest_version']}
+**Category:** {dep['category']}
+**Current version:** {dep['current_version']}
+**Latest version:** {dep['latest_version']}
 
-Latest release: [View here]({dep['latest_release_url']})
+Please review the [changelog]({dep['latest_release_url']}) and update the documentation accordingly.
 """
 
         # Add outdated snippets information if available
@@ -108,7 +108,7 @@ Latest release: [View here]({dep['latest_release_url']})
                 
                 # Include file path and line number as a link to the repository file if possible
                 repo_file_path = f"https://github.com/polkadot-developers/polkadot-docs/blob/master/{file_path.replace('./', '')}?plain=1#L{line_number}"
-                body += f"### {i}. [{os.path.basename(file_path)}:{line_number}]({repo_file_path})\n\n"
+                body += f"### {i}. [{file_path}:{line_number}]({repo_file_path})\n\n"
                 
                 # Add URLs for reference
                 body += f"**Current URL:** {current_url}\n\n"
