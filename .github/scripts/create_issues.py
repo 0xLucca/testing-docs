@@ -107,8 +107,8 @@ Latest release: [View here]({dep['latest_release_url']})
                 latest_url = snippet['latest_url']
                 
                 # Include file path and line number as a link to the repository file if possible
-                repo_file_path = f"https://github.com/polkadot-developers/polkadot-docs/blob/main/{file_path.replace('./', '')}?plain=1#L{line_number}"
-                body += f"### {i}. [{os.path.basename(file_path)}:{line_number}]({repo_file_path}#L{line_number})\n\n"
+                repo_file_path = f"https://github.com/polkadot-developers/polkadot-docs/blob/master/{file_path.replace('./', '')}?plain=1#L{line_number}"
+                body += f"### {i}. [{os.path.basename(file_path)}:{line_number}]({repo_file_path})\n\n"
                 
                 # Add URLs for reference
                 body += f"**Current URL:** {current_url}\n\n"
