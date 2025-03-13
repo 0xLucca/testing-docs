@@ -14,7 +14,8 @@ def issue_exists(title):
             "Authorization": f"token {GITHUB_TOKEN}",
             "Accept": "application/vnd.github.v3+json",
         }
-        response = requests.get(REPO_API_URL, headers=headers)
+        api_url_with_query = f"{REPO_API_URL}?per_page=100"
+        response = requests.get(api_url_with_query, headers=headers)
         response.raise_for_status()
 
         issues = response.json()
@@ -61,11 +62,9 @@ def format_code_diff(current_code, latest_code):
     
     # Simple diff: prefix removed lines with - and added lines with +
     for line in current_lines:
-        # if line not in latest_lines:
         diff_md += f"- {line}\n"
     
     for line in latest_lines:
-        # if line not in current_lines:
         diff_md += f"+ {line}\n"
     
     diff_md += "```\n"
@@ -119,8 +118,6 @@ Please review the [changelog]({dep['latest_release_url']}) and update the docume
                     body += "**Code Difference:**\n\n"
                     body += format_code_diff(snippet['current_code'], snippet['latest_code'])
                     body += "\n"
-        
-        body += "\nPlease review the change log and update the documentation accordingly."
 
         create_github_issue(title, body)
 
