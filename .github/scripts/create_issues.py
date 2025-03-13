@@ -7,22 +7,6 @@ GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 # REPO_API_URL = "https://api.github.com/repos/polkadot-developers/polkadot-docs/issues"
 REPO_API_URL = "https://api.github.com/repos/0xLucca/testing-docs/issues"
 
-def get_current_branch():
-    """Get the current git branch from GitHub environment variables."""
-    # In GitHub Actions, we can use GITHUB_REF to get the current branch
-    github_ref = os.environ.get("GITHUB_REF")
-    if github_ref and github_ref.startswith("refs/heads/"):
-        return github_ref.replace("refs/heads/", "")
-    
-    # Fallback to GITHUB_HEAD_REF for pull requests
-    github_head_ref = os.environ.get("GITHUB_HEAD_REF")
-    if github_head_ref:
-        return github_head_ref
-        
-    # Default to main if we can't determine the branch
-    print("Warning: Could not determine current Git branch from environment variables. Using 'main' as default.")
-    return "main"
-
 def issue_exists(title):
     """Check if an issue with the same title already exists."""
     try:
@@ -123,7 +107,7 @@ Latest release: [View here]({dep['latest_release_url']})
                 latest_url = snippet['latest_url']
                 
                 # Include file path and line number as a link to the repository file if possible
-                repo_file_path = f"https://github.com/polkadot-developers/polkadot-docs/blob/main/{file_path.replace('./', '')}"
+                repo_file_path = f"https://github.com/polkadot-developers/polkadot-docs/blob/main/{file_path.replace('./', '')}#L{line_number}"
                 body += f"### {i}. [{os.path.basename(file_path)}:{line_number}]({repo_file_path}#L{line_number})\n\n"
                 
                 # Add URLs for reference
